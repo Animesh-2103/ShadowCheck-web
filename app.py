@@ -47,6 +47,9 @@ def index():
         hist = conn.execute("SELECT DISTINCT username FROM history ORDER BY id DESC LIMIT 6").fetchall()
     return render_template("index.html", result=res, exact=ex, similar=sim, history=hist, score=score)
 
+import os
+
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
